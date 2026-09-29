@@ -1,0 +1,37 @@
+import {createRequire} from 'node:module';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+const {chromium}=require('/Users/xinwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser=await chromium.launch({headless:true,executablePath:'/Users/xinwei/.cache/puppeteer/chrome-headless-shell/mac_arm-148.0.7778.97/chrome-headless-shell-mac-arm64/chrome-headless-shell'});
+const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true}),errors=[],checks=[];
+const dir='prototype/qa/prd-reader';await fs.mkdir(dir,{recursive:true});
+page.on('pageerror',e=>errors.push(e.message));
+const check=(name,value)=>{assert.ok(value,name);checks.push(name);};
+try{
+ await page.goto('http://127.0.0.1:8896/?prd=1#home');await page.waitForSelector('#prd-content h1');await page.waitForSelector('#moment');
+ check('原型与PRD并排可见',await page.locator('.phone').isVisible()&&await page.locator('#prd-panel').isVisible());
+ check('完整正文含分类提示词、微信登录与验收',await page.locator('#prd-content').innerText().then(t=>['五类人群提示词','微信登录与账号归属','海报由 Codex 生成','当前原型与正式能力区分','验收'].every(x=>t.includes(x))));
+ check('表格和提示词正确排版',await page.locator('#prd-content table').count()>5&&await page.locator('#prd-content pre code').count()===2);
+ await page.locator('#moment').fill('看 PRD 时保留的草稿');
+ await page.screenshot({path:`${dir}/desktop.png`,animations:'disabled'});
+ const value=await page.locator('#prd-chapters option').evaluateAll(os=>os.find(o=>o.textContent.includes('十、海报生成提示词配置')).value);
+ await page.locator('#prd-chapters').selectOption(value);
+ check('目录定位不改变原型路由',page.url().endsWith('#home')&&await page.locator(`#${value}`).evaluate(h=>{const p=document.querySelector('#prd-content').getBoundingClientRect(),r=h.getBoundingClientRect();return r.top>=p.top&&r.top<p.top+80;}));
+ await page.screenshot({path:`${dir}/prompts.png`,animations:'disabled'});
+ const downloading=page.waitForEvent('download');await page.locator('.prd-controls a[download]').click();const download=await downloading;
+ await download.saveAs(`${dir}/download.md`);
+ check('下载与PRD源文件一致',(await fs.readFile(`${dir}/download.md`)).equals(await fs.readFile('docs/产品方案-v1.0.md')));
+ await page.locator('#prd-close').click();
+ check('收起后保留原型草稿',await page.locator('#moment').inputValue()==='看 PRD 时保留的草稿');
+ await page.setViewportSize({width:390,height:844});await page.locator('#prd-toggle').click();await page.waitForSelector('#prd-content h1');
+ check('手机展开PRD可读且无横向溢出',await page.locator('#prd-panel').isVisible()&&!await page.locator('.phone').isVisible()&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.screenshot({path:`${dir}/mobile.png`,animations:'disabled'});
+ await page.locator('#prd-toggle').click();check('手机可返回原型且保留草稿',await page.locator('.phone').isVisible()&&await page.locator('#moment').inputValue()==='看 PRD 时保留的草稿');
+ await page.route('**/docs/**',route=>route.abort());await page.locator('#prd-toggle').click();await page.waitForFunction(()=>document.querySelector('#prd-content').textContent.includes('暂时无法'));
+ check('加载失败提供重试',await page.locator('#prd-refresh').isEnabled());
+ await page.unroute('**/docs/**');await page.locator('#prd-refresh').click();await page.waitForSelector('#prd-content h1');
+ check('重试恢复正文',await page.locator('#prd-content h1').count()===1);
+ check('无页面异常',errors.length===0);
+ await fs.writeFile(`${dir}/report.json`,JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({passed:checks.length,errors}));
+}finally{await browser.close();}

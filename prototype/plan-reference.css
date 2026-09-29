@@ -1,0 +1,36 @@
+/* 套餐页参考图复刻：由父级在入口页加载。本文件只作用于 .plan-page。 */
+.plan-page{position:relative;overflow:hidden;background:#fbfcf7;padding:0 16px 28px;color:#173d2d}
+.plan-page:before{content:"";position:absolute;inset:58px 0 auto;height:205px;background:url('/prototype/assets/plan-reference-hero.png') center/cover no-repeat;pointer-events:none}
+.plan-page>*{position:relative}
+.plan-page .nav{height:58px;margin:0 -2px 0;display:flex;justify-content:space-between;align-items:center}
+.plan-page .nav [data-route]{width:36px;height:36px;padding:0;color:#173d2d;background:transparent;border:0;font-size:30px;line-height:1}
+.plan-page .nav h2{margin:0;text-align:center;font-size:18px;font-weight:700;color:#184b37}
+.plan-page .nav .mini-capsule{justify-self:end}
+.plan-page .plan-hero{min-height:145px;margin:0 0 13px;padding:14px 7px 0;text-align:left}
+.plan-page .plan-hero .sun{display:none}
+.plan-page .plan-hero h1{font-family:var(--serif);font-size:35px;line-height:1.34;letter-spacing:.02em;margin:0 0 8px;color:#184b37}
+.plan-page .plan-hero p{font-size:13px;line-height:1.7;color:#6f7c74;margin:0;max-width:285px}
+.plan-page .plan-card{border:1px solid #d9e5d8;border-radius:18px;background:#f2f8ed;padding:21px 19px 18px;box-shadow:0 7px 20px rgba(47,95,66,.04)}
+.plan-page .plan-label{display:flex;justify-content:space-between;gap:10px;align-items:center;font-family:var(--serif);font-size:20px;line-height:1.35;color:#194a36}
+.plan-page .plan-label .badge{border-radius:999px;background:#dfeedd;padding:8px 12px;font:600 13px var(--sans);color:#2d7653}
+.plan-page .plan-number{font:700 60px/1 Georgia,'Times New Roman',serif;margin:19px 0 5px;color:#184b37}
+.plan-page .plan-number span{font:18px var(--serif);margin-left:8px;color:#194a36}
+.plan-page .plan-period{font-size:13px;line-height:1.7;color:#76847b}
+.plan-page .plan-card:after{content:none}
+.plan-page .plan-card-caption{font-size:13px;color:#7b877b;line-height:20px;margin:7px 0 0}
+.plan-page .plan-price{display:flex;justify-content:space-between;align-items:center;margin:16px 0 0;padding:0;font-size:16px;font-weight:600;color:#194a36}
+.plan-page .plan-price{border:0;margin:0;min-height:54px;padding:8px 5px}
+.plan-page .plan-price strong{display:flex;align-items:center;gap:5px;font-size:14px;color:#527461;font-weight:500}
+.plan-page>.primary{margin-top:2px;border-radius:999px;min-height:51px;background:#39855c;color:#fff;font-size:17px;font-weight:700;box-shadow:none}
+.plan-page>.primary:disabled{opacity:1;background:#83ac96;color:#fff}
+.plan-page .subnote{font-size:12px;color:#7f8a82;margin:9px 0 0;text-align:center}
+.plan-page .tiny-banner{margin:18px 0 0;border-radius:20px;padding:14px 12px;background:#f3f4e7;color:#496856;font-size:13px;line-height:1.6;text-align:center}
+.plan-page .plan-benefits{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:17px;padding-top:16px;border-top:1px solid #d8e3d5}
+.plan-page .plan-benefit{text-align:center;min-width:0;color:#285d46}
+.plan-page .plan-benefit .icon-wrap{width:42px;height:42px;margin:0 auto 7px;display:grid;place-items:center;border-radius:50%;background:#e4f0df;color:#2d7454}
+.plan-page .plan-benefit:nth-child(3n) .icon-wrap,.plan-page .plan-benefit:nth-child(5n) .icon-wrap{background:#f5efd9;color:#c59638}
+.plan-page .plan-benefit i{font-size:23px}
+.plan-page .plan-benefit b{display:block;font-size:12px;line-height:1.35;font-weight:600;white-space:nowrap}
+.plan-page .plan-benefit small{display:block;margin-top:3px;font-size:10px;line-height:1.35;color:#9aa29d;white-space:nowrap}
+.plan-page .plan-footer{display:block;width:calc(100% + 32px);max-width:none;margin:18px -16px -28px;height:auto}
+@media(max-width:374px){.plan-page{padding-left:13px;padding-right:13px}.plan-page .plan-hero{padding-left:13px}.plan-page .plan-hero h1{font-size:31px}.plan-page .plan-card{padding-left:14px;padding-right:14px}.plan-page .plan-label{font-size:17px}.plan-page .plan-number{font-size:52px}.plan-page .plan-number span{font-size:16px;margin-left:4px}.plan-page .plan-benefits{gap:2px}.plan-page .plan-benefit b{font-size:10px}.plan-page .plan-benefit small{font-size:9px}}

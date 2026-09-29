@@ -1,0 +1,145 @@
+/* Primary navigation and daily check-in. */
+.home-leaf{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#e6efd9;color:#668d36;font-size:23px}
+.app-tabbar{position:fixed;z-index:15;display:grid;grid-template-columns:repeat(3,1fr);background:#fffffff5;border-top:1px solid #e3e9df;padding:7px 12px max(9px,env(safe-area-inset-bottom));backdrop-filter:blur(12px);box-shadow:0 -5px 18px #264b3505}
+.app-tabbar[hidden]{display:none}
+.app-tabbar button{min-height:49px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:11px;color:#7e897e;border-radius:14px}
+.app-tabbar button i{font-size:23px;line-height:1.2}
+.app-tabbar button.active{color:#338454;font-weight:600}
+.app-tabbar button:active{background:#edf4e9}
+.with-tabs #app{padding-bottom:75px}
+.with-tabs .home-indicator{display:none}
+.with-tabs .page{min-height:calc(100dvh - 171px)}
+.with-tabs .home-page{min-height:0}
+.checkin-card{margin:18px 0 24px;padding:17px 16px 12px;background:#edf3e7;border:1px solid #dce7d4;border-radius:17px;color:#285c40}
+.checkin-head{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:13px}
+.checkin-head>span:first-child{display:flex;gap:6px;align-items:center;font-weight:600}
+.checkin-head i{font-size:17px}
+.checkin-status{font-size:11px;color:#718469}
+.checkin-status.done{background:#d9e9cf;color:#3c7348;border-radius:16px;padding:3px 8px}
+.checkin-card h1{font-family:var(--sans);font-size:19px;font-weight:500;margin:10px 0 15px;line-height:1.5;letter-spacing:0}
+.checkin-card h1 strong{font-size:29px;font-weight:600;margin:0 3px;font-variant-numeric:tabular-nums}
+.checkin-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.checkin-day{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:10px;color:#7d8b74;white-space:nowrap}
+.checkin-day i{height:30px;width:30px;border-radius:50%;display:grid;place-items:center;background:#e3eadc;color:#adb9a3;font-size:16px}
+.checkin-day.done i{background:#4b8c5c;color:white}
+.checkin-day.today>span{color:#366d45;font-weight:650}
+.checkin-day.today i{outline:1px solid #8aa87a;outline-offset:3px}
+.checkin-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;margin-top:12px;color:#718469;min-height:36px}
+.checkin-foot button{color:#326f46;min-height:36px;padding:4px 0 4px 8px;font-size:12px}
+.checkin-card p{border-top:1px solid #dce6d4;padding-top:9px;margin:3px 0 0;font-size:11px;color:#78896e}
+.checkin-summary{display:flex;align-items:center;width:100%;text-align:left;gap:12px;margin-top:15px;padding:14px 1px;border-bottom:1px solid var(--line)}
+.checkin-summary>i:first-child{font-size:24px;color:#59834e;width:34px;text-align:center}
+.checkin-summary span{flex:1}.checkin-summary b{display:block;font-size:15px;font-weight:550}.checkin-summary small{display:block;color:#7c8975;font-size:12px;margin-top:3px}
+.checkin-summary>i:last-child{font-size:20px;color:#7e9174}
+@media(min-width:761px){.with-tabs .page{min-height:704px}}
+@media(max-width:350px){.checkin-card{padding:14px 12px 10px}.checkin-days{gap:4px}.checkin-day i{width:27px;height:27px}.checkin-head{font-size:12px}.checkin-status{font-size:10px}}
+.home-hero{margin-bottom:12px}
+.scene-preference{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:65px;width:100%;padding:12px 1px;border-bottom:1px solid var(--line);font-size:14px}
+.scene-preference>span{display:flex;align-items:center;gap:12px}
+.scene-preference>span:first-child>i{font-size:23px;color:#59834e;width:34px;text-align:center}
+.scene-preference b{font-size:15px;font-weight:550}
+.scene-preference>span:last-child{gap:5px;color:#7c8975;font-size:13px}
+.scene-preference>span:last-child>i{font-size:20px}
+.scene-options{display:grid;gap:8px}
+.scene-options button{display:flex;align-items:center;gap:12px;width:100%;min-height:49px;padding:12px 14px;text-align:left;border-radius:11px;background:#f1f4eb;font-size:15px}
+.scene-options button[aria-pressed=true]{background:#e0edd7;color:#347048}
+.scene-options button>span{flex:1}.scene-options button>i{font-size:20px}
+.home-page{position:relative;--home-gutter:16px}
+.home-page>.nav{position:absolute;top:36px;right:8px;height:36px;margin:0;z-index:2}
+.home-page>.nav .mini-capsule{margin-left:auto}
+.home-page .home-hero{margin-top:-8px}
+.home-page>.textarea-wrap+.primary{margin-top:16px}
+.desktop-note{justify-content:flex-end}
+/* Approved design review: give creation and finished posters more space. */
+.home-page .home-hero{margin:0 calc(-1 * var(--home-gutter)) 16px}
+.home-page .home-hero img{height:auto;object-fit:contain;border-radius:0}
+.home-page>.nav .mini-capsule{width:60px;height:28px}
+@media(max-width:374px){.home-page{--home-gutter:12px}}
+.home-page .photo-area.is-empty{height:130px;aspect-ratio:auto}
+.home-page .photo-empty{padding:10px 0;gap:2px}
+.home-page .upload-camera{width:49px;height:49px;margin-bottom:3px}
+.home-page .upload-camera i{font-size:29px}
+.home-page .photo-empty small{color:#617760;font-size:13px}
+.home-page .home-footer{height:auto;object-fit:contain;margin-top:14px;margin-bottom:4px}
+.home-page textarea{font-size:14px}
+.home-page textarea::placeholder{color:#747f82}
+.home-page .count{color:#717d80;font-size:12px}
+.checkin-card{margin:12px 0 18px;padding:12px 14px 13px;border-radius:14px}
+.checkin-head{font-size:12px;line-height:20px}
+.checkin-status{font-size:11px;color:#61755b}
+.checkin-status.done{padding:1px 8px}
+.checkin-progress{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:3px 0 8px;min-height:33px}
+.checkin-progress h1{font-size:16px;line-height:30px;margin:0}
+.checkin-progress h1 strong{font-size:24px}
+.checkin-progress>button{color:#356d42;font-size:12px;min-height:36px;min-width:66px;padding:6px 0 6px 10px}
+.checkin-days{gap:6px}
+.checkin-day{font-size:11px;gap:5px;color:#65755b;line-height:17px}
+.checkin-day i{height:26px;width:26px;font-size:15px}
+.checkin-day.today i{outline-offset:2px}
+.records-page .record{display:flex;flex-direction:row;align-items:flex-start;gap:12px;padding:16px 0;min-height:0}
+.records-page .record-photo,.records-page .record-photo[data-poster-preview]{width:104px;height:auto;aspect-ratio:3/2;border-radius:8px;align-self:flex-start;display:block;margin-top:2px;flex-shrink:0}
+.records-page .record-photo .scene{object-fit:cover}
+.records-page .record-info{display:flex;flex-direction:column;flex:1;align-self:stretch;width:auto;min-width:0;padding:0;text-align:left;min-height:78px}
+.records-page .record-info h3{order:1;font-family:var(--sans);font-size:15px;font-weight:550;line-height:22px;margin:0 0 5px}
+.records-page .record-info .date{order:2;display:block;font-size:11px;line-height:18px;color:#73806f;margin-top:0;white-space:normal}
+.records-page .state-pill{order:3;display:block;font-size:11px;line-height:20px;color:#487951;padding-right:34px;margin-top:3px}
+.records-page .record-estimate{order:4;font-size:11px;line-height:18px;margin-top:2px}
+.records-page .state-pill.working{color:#8c6d2d}
+.records-page .state-pill.failed{color:#a5624e}
+.records-page .record-more{position:absolute;right:-8px;bottom:5px;min-height:44px;min-width:44px;color:#6d7d68;font-size:23px;border-radius:50%}
+.records-page .record-info:focus-visible{outline-offset:2px}
+@media(max-width:350px){.records-page .record-photo,.records-page .record-photo[data-poster-preview]{width:88px}.records-page .record{gap:10px}}
+.records-page .record-more:active{background:#edf2e7}
+.record-menu{display:grid;gap:8px;margin-top:16px}
+.record-menu button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;border-radius:11px;background:#eff3e9;font-size:15px}
+.record-menu button i{font-size:19px}
+.record-menu button:last-child{background:transparent;color:#70816a}
+.record-filter button{color:#67785f}
+.profile-page .profile-head{padding-bottom:12px}
+.profile-page .scene-preference{margin:0 0 22px;padding:10px 13px;background:#eff3e9;border:1px solid #e0e8d9;border-radius:12px;min-height:58px}
+.profile-page .checkin-summary{margin-top:15px;min-height:78px}
+.profile-page .row small,.checkin-summary small{font-size:13px;color:#67785f}
+.profile-page .scene-preference>span:last-child{color:#54704f;font-size:14px}
+.profile-page .profile-quote{padding-top:38px}
+.app-tabbar button{font-size:12px;color:#65765f}
+@media(max-width:350px){.home-page .photo-area.is-empty{height:126px}.home-page .photo-empty strong{font-size:15px}.home-page .photo-empty small{font-size:12px}.checkin-card{padding:11px 12px 12px}.checkin-day{font-size:10px}.checkin-day i{width:25px;height:25px}.records-page .record-info h3{font-size:15px}}
+
+/* Profile order: quota, check-in, scene preference, usage. */
+.profile-page .scene-preference{margin:12px 0 0}
+/* Consistent account rows: check-in, scene preference, usage history. */
+.profile-page .scene-preference{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0;padding:14px 1px;min-height:78px}
+.profile-page .scene-preference>span{gap:12px}
+.profile-page .scene-preference>span:first-child>i{font-size:24px;color:#59834e;width:34px}
+.profile-page .scene-preference>span:last-child{gap:5px;color:#67785f;font-size:13px}
+.profile-page .row{min-height:78px;padding:14px 1px;gap:12px;border-bottom:1px solid var(--line)}
+.profile-page .row .row-icon{width:34px;height:34px;background:none;color:#59834e}
+.profile-page .row .row-icon .icon{width:24px;height:24px}
+.profile-page .row strong{font-size:15px;font-weight:550}
+.profile-page .row .chevron{width:20px;height:20px;color:#7e9174}
+
+/* Compact recent posters: two full cards and half of the next card. */
+.recent-praises{margin-top:20px;padding-bottom:3px}
+.recent-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.recent-heading h2{font-size:16px;line-height:1.5;margin:0;font-weight:600}
+.recent-heading>button{display:flex;align-items:center;gap:2px;font-size:12px;color:#60775e;min-height:44px;padding:8px 0 8px 12px}
+.recent-heading>button i{font-size:17px}
+.recent-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 0 4px;scrollbar-width:none;align-items:stretch}
+.recent-list::-webkit-scrollbar{display:none}
+.recent-card{flex:0 0 calc((100% - 20px) / 2.5);min-width:0;padding:0;display:flex;flex-direction:column;text-align:left;border:0;border-radius:10px;overflow:hidden;background:#fffefa;scroll-snap-align:start}
+.recent-card:active{background:#f4f8ef}
+.recent-card:focus-visible{outline-offset:-3px}
+.recent-photo{position:relative;display:block;width:100%;aspect-ratio:3/2;overflow:hidden;background:#f5f5ed;border-radius:10px}
+.recent-photo .scene,.recent-photo canvas{display:block;width:100%;height:100%;object-fit:cover}
+.recent-photo canvas{object-fit:contain}
+.recent-state{position:absolute;left:5px;bottom:5px;padding:1px 6px;border-radius:5px;font-size:10px;line-height:18px;background:#f6efdded;color:#795d25}
+.recent-state.failed{background:#f8eee6ed;color:#91543b}
+.recent-details{display:flex;flex-direction:column;gap:3px;padding:7px 3px 6px;min-width:0}
+.recent-details strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:500;line-height:20px}
+.recent-details time{font-size:11px;line-height:17px;color:#72816b;font-variant-numeric:tabular-nums}
+.recent-empty{display:flex;align-items:center;gap:13px;padding:20px 17px;background:#f3f7ee;border:1px solid #e3eadc;border-radius:14px}
+.recent-empty>i{font-size:29px;color:#7c9c6a;flex-shrink:0}
+.recent-empty strong{font-size:14px;font-weight:500;color:#4c6549}
+.recent-empty p{font-size:12px;line-height:1.6;color:#77876c;margin:4px 0 0}
+
+
+.home-page>.primary[data-action="generate"]{padding:12px 20px;justify-content:center}

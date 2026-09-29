@@ -1,0 +1,92 @@
+import {authenticatedFixture} from './auth-fixture.mjs';
+import {createRequire} from 'node:module';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+const {chromium}=require('/Users/xinwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser=await chromium.launch({headless:true,executablePath:'/Users/xinwei/.cache/puppeteer/chrome-headless-shell/mac_arm-148.0.7778.97/chrome-headless-shell-mac-arm64/chrome-headless-shell'});
+const page=await browser.newPage({viewport:{width:390,height:844},acceptDownloads:true});
+const errors=[],checks=[];
+page.on('pageerror',e=>errors.push(e.message));
+const check=(name,value)=>{assert.ok(value,name);checks.push(name);};
+const state=()=>page.evaluate(()=>window.KuaPrototype.store.getAccount());
+const route=async hash=>{await page.goto('http://127.0.0.1:8896/#'+hash);await page.waitForSelector('.page');};
+const shot=name=>page.screenshot({path:`prototype/qa/${name}.png`,fullPage:true,animations:'disabled',style:'.toast{visibility:hidden!important}'});
+await authenticatedFixture(page);
+try{
+ await page.clock.install();
+ await route('home');await page.waitForSelector('.scene');
+ await page.locator('[data-category="mama"]').click();
+ await page.locator('[data-action="generate"]').click();
+ await page.waitForSelector('dialog[open]');
+ check('提交不跳转制作页',page.url().endsWith('#home'));
+ check('提示5分钟和离开后找回',/5 分钟.*可以先离开.*我的夸夸/.test(await page.locator('dialog').innerText()));
+ const first=(await state()).jobs[0];
+ check('提交只预占一次',(await state()).free===2);
+ await shot('submitted');
+ await page.locator('dialog [data-route="records"]').click();
+ await page.waitForSelector('.record-estimate');
+ check('记录显示提交时间和制作状态',/\d{2}:\d{2}.*提交/.test(await page.locator('.record-info').innerText()));
+ await shot('records-working');
+ await page.reload();await page.waitForSelector('.record-estimate');
+ check('刷新后找回同一任务',(await state()).jobs[0].id===first.id);
+ await route('job/'+first.id);await page.waitForURL('**/#records');
+ check('旧制作页链接回到记录列表',true);
+ await route('home');await page.locator('[data-action="generate"]').click();
+ check('重复提交不重复扣次',(await state()).free===2&&(await state()).jobs.length===1);
+ await page.locator('[data-action="continue-recording"]').click();
+ check('继续记录清空输入但保留已提交任务',(await state()).draft.text===''&&(await state()).draft.photos.length===0&&(await state()).jobs.length===1);
+ await page.locator('#moment').fill('我正在记录另一件事');
+ await page.clock.fastForward(301000);
+ check('等待完成不打断另一份草稿',(await page.locator('#moment').inputValue())==='我正在记录另一件事'&&page.url().endsWith('#home'));
+ check('五分钟后完成',(await state()).jobs[0].status==='done');
+ await route('records');await page.waitForSelector('[data-poster-preview] canvas');await shot('records-done');
+ await page.locator('.record-photo').click();await page.waitForSelector('.poster-preview-image img');await page.locator('dialog .modal-close').click();await route('job/'+first.id);await page.waitForSelector('#poster-host canvas');
+ check('海报默认3比2横版',await page.locator('#poster-host canvas').evaluate(c=>c.width===1500&&c.height===1000));
+ await shot('result-landscape');
+ const downloadPromise=page.waitForEvent('download');await page.locator('[data-action="download"]').click();
+ await (await downloadPromise).saveAs('prototype/qa/export-landscape.png');
+ const png=await fs.readFile('prototype/qa/export-landscape.png');
+ check('保存PNG与横版预览尺寸一致',png.readUInt32BE(16)===1500&&png.readUInt32BE(20)===1000);
+ await route('home');
+ await page.evaluate(()=>window.KuaPrototype.store.setDraft({photos:['sample:0'],text:'失败后再试一遍'}));
+ await page.reload();await page.waitForSelector('[data-action="generate"]');await page.locator('[data-action="generate"]').click();
+ const second=(await state()).jobs.at(-1);
+ await page.evaluate(()=>{const s=window.KuaPrototype.store,j=s.getAccount().jobs.at(-1);s.failJob(j.id,j.attempt);});
+ await route('job/'+second.id);await page.waitForSelector('[data-action="retry"]');
+ await page.clock.fastForward(120000);
+ await page.locator('[data-action="retry"]').click();await page.waitForSelector('dialog[open]');
+ check('重试回到记录列表并提示等待',page.url().endsWith('#records'));
+ check('重试从本次时间计算等待',(await state()).jobs.at(-1).startedAt>second.startedAt);
+ await page.locator('dialog [data-route="records"]').click();
+ await page.clock.fastForward(181000);
+ check('重试不会沿用原任务时间提前完成',(await state()).jobs.at(-1).status==='working');
+ await page.clock.fastForward(120000);
+ check('重试完成且次数未重复扣除',(await state()).jobs.at(-1).status==='done'&&(await state()).free===1);
+ // Simulate returning after the tab was closed: advance wall time, then reload.
+ await route('home');await page.evaluate(()=>window.KuaPrototype.store.setDraft({photos:['sample:0'],text:'离开后再回来'}));
+ await page.reload();await page.waitForSelector('[data-action="generate"]');await page.locator('[data-action="generate"]').click();
+ const third=(await state()).jobs.at(-1);
+ await page.clock.setSystemTime(third.startedAt+301000);
+ await route('records');
+ check('离开后回来恢复已完成任务',(await state()).jobs.at(-1).status==='done');
+ // Cover all supported photo counts without creating extra chargeable tasks.
+ for(let count=1;count<=6;count++){
+  const result=await page.evaluate(async n=>{
+   const {renderPoster}=await import('/prototype/poster.js');
+   const photos=Array.from({length:n},(_,i)=>{const c=document.createElement('canvas');c.width=400;c.height=400;const x=c.getContext('2d');x.fillStyle=['#d89481','#90ae8c','#8aa5ca','#d5b46f','#ad94bd','#85b9b5'][i];x.fillRect(0,0,400,400);x.fillStyle='white';x.font='120px sans-serif';x.fillText(String(i+1),150,240);return c.toDataURL();});
+   const praises=photos.map((_,i)=>`第${i+1}张：这个瞬间，值得为自己留下一份肯定。`);
+   const painted=[],original=CanvasRenderingContext2D.prototype.fillText;
+   CanvasRenderingContext2D.prototype.fillText=function(text,...args){painted.push(text);return original.call(this,text,...args);};
+   let c;
+   try{c=await renderPoster({photos,praises,title:'每一份用心，\n都值得被看见。',body:'把普通的日子，过成自己喜欢的样子。',date:'2026.09.28'});}finally{CanvasRenderingContext2D.prototype.fillText=original;}
+   if(n>1&&!praises.every(t=>painted.join('').includes(t)))throw Error('有照片缺少对应夸赞');
+   return {width:c.width,height:c.height,url:c.toDataURL()};
+  },count);
+  check(`${count}张照片保持横版`,result.width===1500&&result.height===1000);
+  if(count===6)await fs.writeFile('prototype/qa/landscape-six.png',Buffer.from(result.url.split(',')[1],'base64'));
+ }
+ check('无页面异常',errors.length===0);
+ await fs.writeFile('prototype/qa/async-flow-report.json',JSON.stringify({checkedAt:new Date().toISOString(),checks,errors},null,2));
+ console.log(JSON.stringify({passed:checks.length,errors},null,2));
+}finally{await browser.close();}

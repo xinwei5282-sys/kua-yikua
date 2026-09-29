@@ -1,0 +1,168 @@
+/* 夸夸集参考图样式：仅作用于记录页，底部导航沿用全局组件。 */
+.records-page {
+  position:relative;
+  padding:0 14px 20px;
+  background: #f8fbf4;
+}
+.phone:has(.records-page)>.statusbar{position:absolute;inset:0 0 auto;z-index:3;pointer-events:none;background:transparent}
+.records-page>.nav{position:absolute;right:12px;top:38px;height:32px;z-index:3}
+
+.records-page .records-hero {
+  position: relative;
+  min-height: 180px;
+  margin: 0 -14px;
+  padding: 75px 22px 20px;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background: #eef6e9 url('/prototype/assets/records-reference-hero.png') center / cover no-repeat;
+}
+
+.records-page .records-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.records-page .records-hero h1 {
+  margin: 0;
+  color: #143c2c;
+  font-size: 31px;
+  line-height: 1.16;
+  letter-spacing: .02em;
+}
+
+.records-page .records-hero p {
+  margin: 8px 0 0;
+  color: #315746;
+  font-size: 15px;
+}
+
+.records-page .checkin-card {
+  position: relative;
+  z-index: 2;
+  margin-top: -9px;
+  margin-bottom:16px;
+  background:#f1f8ecef;
+}
+
+.records-page .record-filter {
+  margin: 12px 0 10px;
+  gap: 8px;
+}
+
+.records-page .record-filter button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 22px;
+  background: #eef0ed;
+  color: #53615c;
+  font-size: 15px;
+}
+
+.records-page .record-filter button.active {
+  background: #a9dec3;
+  color: #123b2b;
+  font-weight: 700;
+}
+
+.records-page .record {
+  position: relative;
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 88px;
+  margin: 0 0 8px;
+  padding: 11px 12px;
+  border: 1px solid rgba(227,235,226,.9);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(49, 80, 59, .045);
+}
+
+.records-page .record-photo,.records-page .record-photo[data-poster-preview] {
+  width: 90px;
+  height: 66px;
+  align-self:center;
+  margin-top:0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  background: #edf3ed;
+}
+
+.records-page .record-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.records-page .record-info {
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  border: 0;
+  background: transparent;
+}
+
+.records-page .record-info h3 {
+  display: -webkit-box;
+  margin: 0 0 4px;
+  overflow: hidden;
+  color: #16231e;
+  font-size: 15px;
+  line-height: 1.42;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding-right:20px;
+}
+
+.records-page .record-info .date {
+  display: block;
+  margin-bottom: 6px;
+  color: #8a9690;
+  font-size: 11px;
+}
+
+.records-page .state-pill {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 4px;
+  padding: 3px 7px;
+  border-radius: 7px;
+  background: #eaf8ee;
+  color: #258051;
+  font-size: 10px;
+  line-height: 1.2;
+  margin-top:0;
+}
+.records-page .record-tags{order:3;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.records-page .record-tags .state-pill{margin:0;gap:3px}
+.records-page .record-estimate{font-size:10px}
+
+.records-page .state-pill.working { background: #fff6dd; color: #9a6a19; }
+.records-page .state-pill.failed { background: #fff0ed; color: #b55745; }
+.records-page .state-pill.scene { margin-left: 4px; background: #edf8ef; color: #37845a; }
+
+.records-page .record-more {
+  position:absolute;
+  top:4px;right:0;bottom:auto;
+  align-self: start;
+  width: 36px;
+  height: 36px;
+  min-width:36px;min-height:36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #63716b;
+}
+
+.records-page .record-more i { font-size: 18px; }
+
+@media (max-width: 350px) {
+  .records-page .record { grid-template-columns: 78px minmax(0, 1fr); gap: 9px; padding: 9px; }
+  .records-page .record-photo,.records-page .record-photo[data-poster-preview] { width: 78px; height: 60px; }
+  .records-page .records-hero { min-height: 170px; }
+  .records-page .record-info h3{font-size:14px}
+  .records-page .record-filter button{font-size:14px;white-space:nowrap}
+}

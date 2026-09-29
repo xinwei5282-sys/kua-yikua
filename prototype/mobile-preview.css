@@ -1,0 +1,20 @@
+/* A phone-sized preview; PRD remains available outside the business screen. */
+.intro,.review-nav{display:none}
+.desktop-note{max-width:404px;margin:12px auto 8px;padding:0 4px;min-height:40px}
+.preview-tools>span{display:none}
+.stage{grid-template-columns:404px;gap:0;padding:0 16px 18px;justify-content:center}
+.phone{width:404px;height:min(858px,calc(100dvh - 86px));min-height:0;display:flex;flex-direction:column;border-color:#151715}
+.phone>.statusbar,.phone>.home-indicator{flex-shrink:0}
+.phone:has(.home-page)>.statusbar{position:absolute;inset:0 0 auto;z-index:3;pointer-events:none;background:transparent}
+#app{flex:1;min-height:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:none;scroll-padding-bottom:84px}
+#app::-webkit-scrollbar{display:none}
+.phone .app-tabbar{position:absolute;left:0;bottom:0;width:100%;border-radius:0 0 27px 27px}
+.prd-open .desktop-note{max-width:1156px}
+@media(max-width:760px){
+ .desktop-note{max-width:460px;min-height:48px;height:48px;margin:0 auto;padding:6px 14px}
+ #prd-toggle{min-height:34px;padding:5px 12px}
+ .stage{display:block;padding:0}
+ .phone{width:100%;height:calc(100dvh - 48px);max-width:460px;min-height:0}
+ .phone .app-tabbar{border-radius:0}
+ .prd-open .phone{display:none}
+}

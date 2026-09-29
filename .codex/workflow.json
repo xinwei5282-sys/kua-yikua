@@ -1,0 +1,1 @@
+{"version":1,"commands":{"preview":["node","scripts/preview.mjs"],"verify":["node","scripts/verify.mjs"]}}

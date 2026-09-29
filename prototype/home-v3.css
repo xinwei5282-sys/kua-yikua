@@ -1,0 +1,50 @@
+/* Homepage reference: design/home-reference-2026-09-29.png. Other routes keep UI v2. */
+.phone:has(.home-page){background:#fbfdf8}
+.home-page{padding:0 16px;min-height:0;background:#fbfdf8;color:#102f31;overflow:hidden}
+.home-page .nav{height:62px;margin:0 0 0;z-index:1}
+.home-page .profile-entry{gap:8px;padding:0;min-width:75px}
+.home-page .profile-entry span{width:34px;height:34px;background:#e6efd9;color:#668d36;font-size:24px;display:grid;place-items:center;border-radius:50%}
+.home-page .profile-entry b{font-size:14px}
+.home-page .wordmark{display:flex;flex-direction:column;gap:0;line-height:1.2;left:51%;font-family:var(--serif);font-size:22px;white-space:nowrap;font-weight:700}
+.home-page .wordmark>span{display:flex;align-items:center;gap:3px}
+.home-page .wordmark i{font-size:33px;color:#efae35}
+.home-page .wordmark small{font-family:'Snell Roundhand','Brush Script MT',cursive;font-style:italic;font-size:17px;font-weight:400;color:#688b66;line-height:1.1}
+.home-page .mini-capsule{width:76px;height:32px;background:#ffffffc9}
+.home-hero{margin:-4px -12px 7px}
+.home-hero img{display:block;width:100%;height:auto}
+.home-page .categories{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;margin:0 0 10px}
+.home-page .categories button{min-width:0;min-height:36px;padding:7px 2px;display:flex;align-items:center;justify-content:center;gap:3px;border-radius:24px;background:#edf0e9;font-size:11px;font-weight:500;color:#193034;white-space:nowrap}
+.home-page .categories button i{font-size:15px;line-height:1}
+.home-page .categories button.active{background:#3c8c5b;color:white}
+.home-page .photo-area{border-radius:12px;aspect-ratio:2.21;background:#f5f9ee}
+.home-page .photo-area.is-empty{border:1px dashed #bad2aa}
+.home-page .photo-area.has-photos{aspect-ratio:1.74}
+.home-page .photo-empty{gap:3px;background:transparent url('/prototype/assets/home-v3-upload.png') center/100% 100% no-repeat;color:#123936;padding:15px 0 12px}
+.home-page .upload-camera{width:65px;height:65px;border-radius:50%;background:#e1eccd;display:grid;place-items:center;margin:0 0 5px}
+.home-page .upload-camera i{font-size:36px;line-height:1}
+.home-page .photo-empty strong{font-size:16px;font-weight:600;line-height:1.6}
+.home-page .photo-empty small{font-size:12px;color:#748d7c}
+.home-page .field-head{margin:14px 0 8px}
+.home-page .field-head label{font-size:18px;font-weight:650}
+.home-page .count{position:static;font-size:11px;color:#879198}
+.home-page textarea{background:#ffffffd9;border-color:#dce3dd;border-radius:11px;font-size:13px;padding:12px 12px 25px;height:85px;min-height:85px;line-height:1.7}
+.home-page textarea::placeholder{color:#959ca4}
+.home-page .textarea-wrap>i{position:absolute;right:12px;bottom:7px;font-size:22px;color:#347454;pointer-events:none}
+.home-page .quick-captions{display:flex;justify-content:space-between;gap:4px;margin:7px 0 12px}
+.home-page .quick-captions button{display:flex;align-items:center;justify-content:center;gap:2px;background:#edf0e7;border-radius:30px;font-size:11px;padding:7px 9px;min-height:32px;white-space:nowrap}
+.home-page .quick-captions i{color:#ecad37;font-size:15px}
+.home-page>.primary{border-radius:36px;background:#388659;min-height:55px;position:relative;padding:12px 48px 12px 28px;gap:9px;font-size:17px;box-shadow:0 8px 18px #3e8b5a20}
+.home-page>.primary:hover{background:#2e754c}
+.home-page>.primary>i{font-size:28px;line-height:1}
+.home-page .generate-arrow{position:absolute;right:15px;top:9px;display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:#75b58b}
+.home-page .generate-arrow i{font-size:26px;line-height:1}
+.home-footer{display:block;width:calc(100% + 32px);max-width:none;margin:10px -16px 0;height:auto}
+@media(max-width:374px){.home-page{padding-left:12px;padding-right:12px}.home-page .wordmark{font-size:19px;left:50%}.home-page .wordmark i{font-size:27px}.home-page .profile-entry{min-width:64px;gap:5px}.home-page .profile-entry span{width:29px;height:29px}.home-page .mini-capsule{width:66px}.home-page .categories button{font-size:10px;gap:2px}.home-page .categories button i{font-size:13px}.home-page .quick-captions button{font-size:10px;padding:7px 5px}.home-page .photo-empty strong{font-size:15px}.home-page .upload-camera{height:57px;width:57px}.home-footer{width:calc(100% + 24px);margin-left:-12px;margin-right:-12px}}
+/* Align the reference's tighter vertical rhythm. */
+.home-hero{margin-top:-15px;margin-bottom:5px}
+.home-page .quick-captions{margin-top:7px;margin-bottom:10px}
+.home-page .quick-captions button{height:32px;padding:5px 7px;font-weight:400}
+.home-page>.primary{font-weight:600}
+.home-page .generate-arrow i{font-size:23px}
+.home-page textarea{resize:none}
+.home-footer{margin-top:6px}

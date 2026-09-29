@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#faf9f5"><title>夸一夸 · 发现美好 记录美好</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/prototype/styles.css"><link rel="stylesheet" href="/prototype/ui-v2.css"><link rel="stylesheet" href="/prototype/vendor/remixicon/remixicon.css"><link rel="stylesheet" href="/prototype/home-v3.css"><link rel="stylesheet" href="/prototype/navigation.css"><link rel="stylesheet" href="/prototype/prd-reader.css"><link rel="stylesheet" href="/prototype/mobile-preview.css"><link rel="stylesheet" href="/prototype/home-reference.css"><link rel="stylesheet" href="/prototype/records-reference.css"><link rel="stylesheet" href="/prototype/quota-reference.css"><link rel="stylesheet" href="/prototype/plan-reference.css"></head>
+<body>
+  <div class="desktop-note"><div class="preview-tools"><span>发现美好 记录美好</span><button id="prd-toggle" aria-expanded="false" aria-controls="prd-panel">查看 PRD</button></div></div>
+  <div class="stage">
+    <aside class="intro"><p class="eyebrow">A LITTLE PRAISE, A LITTLE LIGHT</p><h1>发现美好<br><em>记录美好</em></h1><p class="intro-copy">一张照片，一句话。<br>把值得记住的这一刻，<br>变成一份送给自己的肯定。</p><div class="intro-line"></div><p class="intro-foot">五种生活，同样值得被看见。<br>从这里开始，试着夸夸自己。</p><button class="intro-link" data-route="guide">使用帮助 <span>↗</span></button></aside>
+    <div class="phone"><div class="statusbar" aria-hidden="true"><b>9:41</b><span>▮▮▮ &nbsp;◔ &nbsp;▰</span></div><div id="app"></div><div class="home-indicator" aria-hidden="true"></div></div>
+    <section id="prd-panel" class="prd-panel" aria-labelledby="prd-heading" hidden>
+      <header class="prd-panel-head"><div><h2 id="prd-heading" tabindex="-1">产品需求文档</h2><p>PRD v1.1 · Codex 海报生成</p></div><button id="prd-close" aria-label="收起 PRD">×</button></header>
+      <div class="prd-controls"><select id="prd-chapters" aria-label="PRD 章节目录"><option value="">跳转到章节</option></select><button id="prd-refresh">刷新</button><a href="/docs/产品方案-v1.0.md" download="夸一夸-PRD-v1.1.md">下载 PRD</a></div>
+      <article id="prd-content" class="prd-content" aria-label="PRD 正文" aria-busy="false"></article>
+    </section>
+    <aside class="review-nav"><span class="eyebrow">我的生活</span><button data-route="home">01 <span>记录这一刻</span></button><button data-route="records">02 <span>夸夸集</span></button><button data-route="profile">03 <span>我的</span></button></aside>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal" aria-label="操作面板"></dialog>
+  <input id="upload" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+  <input id="camera" type="file" accept="image/*" capture="environment" hidden>
+  <script type="module" src="/prototype/app.js"></script>
+  <script type="module" src="/prototype/prd-reader.js"></script>
+</body></html>

@@ -1,0 +1,53 @@
+/* Selected homepage reference, 2026-09-29 14:49. */
+.phone:has(.home-page){background:#f9fbf6}
+.home-page{padding:0!important;background:#f9fbf6;color:#142f31}
+.home-page .home-hero{margin:0;width:100%}
+.home-page .home-hero img{display:block;width:100%;height:auto;border-radius:0}
+.home-page>.nav{right:12px;top:38px;height:32px}
+.home-page>.nav .mini-capsule{width:68px;height:28px;background:#ffffffbd;border-color:#ffffff80}
+.home-content{position:relative;margin-top:-16px;padding:16px 16px 24px;border-radius:28px 28px 0 0;background:#f9fbf6}
+.home-composer{padding:12px 14px 5px;background:#fff;border-radius:18px;box-shadow:0 5px 22px #24473207}
+.home-composer>label{display:block;font-size:16px;line-height:24px;font-weight:400;color:#828992}
+.home-page .home-composer textarea{height:62px;min-height:62px;padding:4px 0 0;border:0;border-radius:0;box-shadow:none;background:transparent;font-size:14px;line-height:23px;color:#22382f;resize:none;outline-offset:2px}
+.home-page .home-composer textarea::placeholder{color:#9499a1}
+.composer-bottom{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:22px}
+.home-page .count{font-size:12px;line-height:20px;color:#858b93;flex-shrink:0}
+.composer-upload{display:flex;width:100%;align-items:center;justify-content:center;gap:9px;padding:10px 12px;margin:7px 0 8px;min-height:50px;border:1px dashed #b7d2b8;border-radius:12px;background:#f1f7ed;color:#386e4b;font-size:15px;font-weight:550}
+.composer-upload>i{font-size:24px;line-height:1}
+.composer-upload>i:last-child{font-size:19px;margin-left:auto}
+.composer-upload>span{flex:1;text-align:left}
+.photo-source-modal{padding:18px;border-radius:20px}
+.photo-source-modal h2{font-family:var(--sans);font-size:20px}
+.photo-source-modal .modal-close{min-width:44px;min-height:44px}
+.photo-source-options{display:grid;gap:9px;margin-top:15px}
+.photo-source-options>button{display:flex;align-items:center;gap:12px;padding:15px 14px;min-height:58px;border-radius:12px;background:#f0f6eb;color:#345a41;text-align:left;font-size:16px}
+.photo-source-options>button>span{flex:1}
+.photo-source-options>button>i{font-size:24px}
+.photo-source-options>button>i:last-child{font-size:18px;color:#899c87}
+.photo-source-cancel{display:block;width:100%;min-height:46px;margin-top:9px;color:#788574;font-size:14px}
+.home-page .photo-area.composer-photos{display:flex;align-items:center;gap:8px;overflow-x:auto;height:72px;aspect-ratio:auto;padding:6px 0;background:transparent;border:0;border-radius:0;scrollbar-width:none}
+.home-page .composer-photos+.composer-upload{margin-top:4px}
+.composer-photo{position:relative;flex:0 0 60px;width:60px;height:60px;border-radius:8px;overflow:hidden}
+.composer-photo .scene{width:100%;height:100%;object-fit:cover}
+.composer-photo>button{position:absolute;right:0;top:0;width:28px;height:28px;padding:0;display:grid;place-items:center;border-radius:0 0 0 8px;background:#1b302bbb;color:white;font-size:19px}
+.home-content>.primary{margin-top:16px;min-height:54px;padding:12px 18px;border-radius:32px;background:#33865a;color:white;font-size:17px;letter-spacing:1px;font-weight:600;box-shadow:0 7px 19px #38845c17}
+.home-content>.primary:hover{background:#2c764f}
+.home-content .knowledge-line{margin-top:9px}
+.home-page .recent-praises{margin-top:20px;padding-bottom:0}
+.home-page .recent-heading{margin-bottom:8px}
+.home-page .recent-heading h2{font-size:17px;font-weight:650}
+.home-page .recent-heading>button{font-size:12px;color:#7b8189}
+.home-page .recent-card{background:#fff;box-shadow:0 5px 15px #35583e06;border-radius:9px}
+.home-page .recent-photo{aspect-ratio:4/3;border-radius:9px 9px 0 0}
+.home-page .recent-details{padding:7px 8px 9px;gap:6px}
+.home-page .recent-details strong{font-size:13px;line-height:19px;font-weight:500}
+.home-page .recent-details time{font-size:11px;line-height:17px;color:#8a8e95}
+.home-page .recent-empty{min-height:110px;background:#fff;border:0;border-radius:12px}
+.phone .app-tabbar{border-top:0;border-radius:19px 19px 27px 27px;padding-top:9px;padding-bottom:20px;box-shadow:0 -3px 22px #3c5c4404}
+.app-tabbar button{min-height:46px;font-size:12px;color:#636a6b;gap:2px}
+.app-tabbar button i{font-size:25px}
+.app-tabbar button.active{color:#27834a}
+.with-tabs .home-indicator{display:block;position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:108px;height:4px;margin:0;background:#111b15;z-index:16;pointer-events:none}
+.with-tabs #app{padding-bottom:84px}
+@media(max-width:760px){.phone .app-tabbar{border-radius:19px 19px 0 0}}
+@media(max-width:350px){.home-content{padding-left:12px;padding-right:12px}.home-composer{padding-left:12px;padding-right:12px}.home-page .home-composer textarea{font-size:13px}.home-page .recent-details{padding-left:6px;padding-right:6px}.home-content>.primary{font-size:16px}}

@@ -1,0 +1,10 @@
+/* Reference applies only to the existing allowance card. */
+.profile-page .quota-card{position:relative;display:block;min-height:164px;padding:16px 18px;border:0;border-radius:14px;background:#f2f3e8 url('/prototype/assets/quota-reference-background.png') center/cover no-repeat;overflow:hidden}
+.profile-page .quota-card:hover{background-color:#f2f3e8}
+.profile-page .quota-label{color:#41574e;font-size:13px;line-height:21px}
+.profile-page .quota-main{margin-top:6px;display:block}
+.profile-page .quota-value{font-size:36px;line-height:44px;font-weight:600;color:#2f7558}
+.profile-page .quota-value span{font-size:14px;color:#315d4c}
+.profile-page .quota-entry{position:absolute;right:14px;top:15px;background:#ffffffe0;border-radius:20px;padding:5px 9px;font-size:12px;line-height:20px;color:#244e3e;gap:3px}
+.profile-page .quota-detail{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin-top:12px;max-width:56%;font-size:11px;line-height:18px;color:#586c5b}
+@media(max-width:350px){.profile-page .quota-card{min-height:154px;padding:14px}.profile-page .quota-entry{right:10px;top:13px;font-size:11px}.profile-page .quota-value{font-size:32px}.profile-page .quota-detail{max-width:60%;font-size:10px}}

@@ -1,0 +1,33 @@
+import {createRequire} from 'node:module';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const require=createRequire(import.meta.url);
+const {chromium}=require('/Users/xinwei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser=await chromium.launch({headless:true,executablePath:'/Users/xinwei/.cache/puppeteer/chrome-headless-shell/mac_arm-148.0.7778.97/chrome-headless-shell-mac-arm64/chrome-headless-shell'});
+const page=await browser.newPage({viewport:{width:390,height:1000}}),errors=[],checks=[];
+const dir='prototype/qa/home-v3';await fs.mkdir(dir,{recursive:true});
+page.on('pageerror',e=>errors.push(e.message));
+const check=(n,v)=>{assert.ok(v,n);checks.push(n);};
+try{
+ await page.goto('http://127.0.0.1:8896/#home');await page.waitForSelector('#moment');await page.evaluate(()=>document.fonts.ready);await page.locator('.home-hero img').evaluate(i=>i.decode());
+ check('新账号为空白草稿，默认全部',await page.locator('.photo-empty').count()===1&&await page.locator('#moment').inputValue()===''&&await page.locator('[data-all-scenes]').getAttribute('aria-selected')==='true');
+ check('六类入口同屏',await page.locator('.categories [role=tab]').count()===6);
+ await page.locator('.home-page').screenshot({path:`${dir}/home.png`,animations:'disabled'});
+ await page.locator('[data-quick-text]').first().click();await page.locator('#moment').fill('我写下的日常');await page.locator('[data-quick-text]').nth(1).click();
+ check('快捷文案追加并保留输入',await page.locator('#moment').inputValue()==='我写下的日常 谢谢你一直在');
+ await page.locator('[data-category=mama]').click();await page.locator('[data-all-scenes]').click();
+ check('全部映射通用分类且保留输入',await page.evaluate(()=>{const d=KuaPrototype.store.getAccount().draft;return d.category==='daily'&&d.allScenes&&d.text==='我写下的日常 谢谢你一直在';}));
+ await page.locator('#upload').setInputFiles(['prototype/assets/home-v3-hero.png','prototype/assets/home-v3-footer.png']);await page.waitForSelector('.thumbnail:nth-child(2)');
+ check('真实多图上传成功',await page.locator('.thumbnail').count()===2);
+ await page.locator('.home-page [data-action=generate]').click();await page.waitForSelector('.login-modal[open]');
+ check('生成时引导微信授权且尚未扣次',await page.evaluate(()=>KuaPrototype.store.allowance().total===3&&KuaPrototype.store.getAccount().jobs.length===0));
+ check('授权弹窗不超出手机',await page.locator('#modal').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight;}));
+ await page.locator('[data-action=confirm-login]').click();await page.waitForFunction(()=>document.querySelector('#modal').textContent.includes('已收到'));
+ check('授权后提交一份任务，多图只预占一次',await page.evaluate(()=>KuaPrototype.store.allowance().total===2&&KuaPrototype.store.getAccount().jobs.length===1&&KuaPrototype.store.getAccount().jobs[0].photos.length===2));
+ await page.locator('[data-action=continue-recording]').click();await page.locator('.profile-entry').click();await page.waitForSelector('.quota-card');
+ check('我的入口与紧凑套餐卡可用',await page.locator('.quota-value').evaluate(el=>getComputedStyle(el).fontSize==='32px'));
+ await page.goto('http://127.0.0.1:8896/#home');await page.waitForSelector('#moment');await page.locator('#prd-toggle').click();await page.waitForSelector('#prd-content h1');check('PRD仍可在原型中阅读',await page.locator('#prd-content h1').count()===1);await page.locator('#prd-close').click();
+ await page.setViewportSize({width:320,height:844});check('窄屏无横向溢出',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.locator('.home-page').screenshot({path:`${dir}/uploaded-320.png`,animations:'disabled'});
+ check('无浏览器异常',errors.length===0);await fs.writeFile(`${dir}/report.json`,JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({passed:checks.length,errors}));
+}finally{await browser.close();}
