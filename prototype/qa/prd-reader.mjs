@@ -11,11 +11,12 @@ const check=(name,value)=>{assert.ok(value,name);checks.push(name);};
 try{
  await page.goto('http://127.0.0.1:8896/?prd=1#home');await page.waitForSelector('#prd-content h1');await page.waitForSelector('#moment');
  check('原型与PRD并排可见',await page.locator('.phone').isVisible()&&await page.locator('#prd-panel').isVisible());
- check('完整正文含分类提示词、微信登录与验收',await page.locator('#prd-content').innerText().then(t=>['五类人群提示词','微信登录与账号归属','海报由 Codex 生成','当前原型与正式能力区分','验收'].every(x=>t.includes(x))));
- check('表格和提示词正确排版',await page.locator('#prd-content table').count()>5&&await page.locator('#prd-content pre code').count()===2);
+ check('完整正文含场景提示词、微信登录与验收',await page.locator('#prd-content').innerText().then(t=>['五类场景映射','微信登录与账号归属','海报由 Codex 生成','当前原型与正式能力区分','验收'].every(x=>t.includes(x))));
+ check('总提示词与五个场景完整内嵌',await page.locator('#prd-content').innerText().then(t=>['10.5 总提示词（完整原文）','10.6 孩子成长场景提示词（完整原文）','10.7 工作日常场景提示词（完整原文）','10.8 学习探索场景提示词（完整原文）','10.9 兴趣生活场景提示词（完整原文）','10.10 日常美好场景提示词（完整原文）','10.11 提示词统一调用方式（完整原文）','成长维度体系','工作维度体系','学习维度体系','兴趣维度体系','生活维度体系'].every(x=>t.includes(x))));
+ check('表格和提示词正确排版',await page.locator('#prd-content table').count()>5&&await page.locator('#prd-content pre code').count()>=2);
  await page.locator('#moment').fill('看 PRD 时保留的草稿');
  await page.screenshot({path:`${dir}/desktop.png`,animations:'disabled'});
- const value=await page.locator('#prd-chapters option').evaluateAll(os=>os.find(o=>o.textContent.includes('十、海报生成提示词配置')).value);
+ const value=await page.locator('#prd-chapters option').evaluateAll(os=>os.find(o=>o.textContent.includes('10.6 孩子成长场景提示词')).value);
  await page.locator('#prd-chapters').selectOption(value);
  check('目录定位不改变原型路由',page.url().endsWith('#home')&&await page.locator(`#${value}`).evaluate(h=>{const p=document.querySelector('#prd-content').getBoundingClientRect(),r=h.getBoundingClientRect();return r.top>=p.top&&r.top<p.top+80;}));
  await page.screenshot({path:`${dir}/prompts.png`,animations:'disabled'});
