@@ -6,7 +6,7 @@
 - 用户与场景：五类人群上传生活照片，分享一张包含逐图夸赞的海报；手机近距离查看。
 - 第一视觉焦点：最能表达本组记录的主照片，配合清晰的大标题；辅助照片和夸赞围绕主图展开。
 - 设计命题：以主照片和有留白的图文关系，让用户先看见生活瞬间，再读到每一张照片对应的肯定。
-- 保留：原图主体和重要场景、逐图夸赞、横版、合成一张与计一次、品牌夸一夸。
+- 保留：原图主体和重要场景、逐图夸赞、横版、合成一张与计一次、品牌夸夸。
 - 删除：等尺寸照片格子、强制居中裁切、图文无差别堆放。
 - 继承：暖白纸面、深绿色宋体字、自然生活摄影；此前多图版式被否定，不作为版式参考。
 - 参考构图：主图约占画面50%，标题约占左上30%，两张辅助照片沿右侧错落分布；字幕邻近各自照片；留白用于标题与图文分隔。
@@ -40,11 +40,11 @@ Composition: clear asymmetrical hierarchy. LARGE expressive two-line headline in
 Exact Chinese title:
 “你把日子，
 过出了光。”
-Tiny restrained eyebrow above title “夸一夸 · 日常”
+Tiny restrained eyebrow above title “夸夸 · 日常”
 Exact bread caption near bread hero, strong first line “亲手做的，格外香。”
 second line “把一份用心，揉进了日常。”
 Exact desk caption beside desk image “忙碌之间，也记得温柔待自己。”
 Exact flower caption beside flowers “把花放进日常，把美好留给自己。”
-Tiny date “2026.09.28” bottom left, small brand “夸一夸” with simple tiny gold sun bottom right.
+Tiny date “2026.09.28” bottom left, small brand “夸夸” with simple tiny gold sun bottom right.
 Text must be legible, accurate and elegant, with a strong scale contrast between title and captions. The poster must look excellent both at full size and as a thumbnail. No phones, no exterior board, no product explanation.
 

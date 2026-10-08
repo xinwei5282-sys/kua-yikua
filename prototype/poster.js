@@ -1,7 +1,7 @@
 import {preparePhoto,fitPhoto} from './photo-processing.js';
 
 /**
- * Poster export helpers for 夸一夸.
+ * Poster export helpers for 夸夸.
  *
  * This module intentionally only consumes already-resolved image URLs. It does
  * not fetch application data or make network requests on its own.
@@ -132,7 +132,7 @@ function drawPraisedPhotos(ctx, photos, praises, title) {
   };
   const titleWidth=photos.length<=3?800:photos.length===4?750:630;
   ctx.fillStyle='#829077';ctx.font=`22px ${SANS}`;
-  ctx.fillText('夸一夸 · 值得记住的日常',56,65);
+  ctx.fillText('夸夸 · 值得记住的日常',56,65);
   ctx.fillStyle=COLORS.ink;ctx.fillRect(56,84,62,2);
   textBlock(ctx,title||'每个瞬间，\n都值得被看见。',56,112,titleWidth,182,66,COLORS.ink,600);
   photos.forEach((photo,i)=>{
@@ -187,7 +187,7 @@ export async function renderPoster({ photos = [], title = '', body = '', date = 
   ctx.fillStyle = COLORS.muted; ctx.font = `24px ${SANS}`;
   ctx.fillText(String(date || ''), 48, HEIGHT - 48);
   ctx.fillStyle = COLORS.ink; ctx.font = `600 30px ${SANS}`; ctx.textAlign = 'right';
-  ctx.fillText('夸一夸', WIDTH - 100, HEIGHT - 48);
+  ctx.fillText('夸夸', WIDTH - 100, HEIGHT - 48);
   drawSun(ctx, WIDTH - 68, HEIGHT - 59, .72);
   ctx.textAlign = 'left';
   return canvas;
@@ -208,7 +208,7 @@ export function canvasToBlob(canvas) {
 }
 
 /** Download the canvas as a real PNG and release the temporary object URL. */
-export async function downloadCanvas(canvas, filename = '夸一夸.png') {
+export async function downloadCanvas(canvas, filename = '夸夸.png') {
   const blob = await canvasToBlob(canvas);
   const url = URL.createObjectURL(blob);
   try {

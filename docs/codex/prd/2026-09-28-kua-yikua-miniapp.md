@@ -99,7 +99,7 @@
 
 总提示词、五类场景规则与统一调用全文维护在[海报 Prompt 总规范](../../kua_yi_kua_poster_prompts.md)，业务流程、字段和验收见[产品方案第十节](../../产品方案-v1.0.md)。本稿不复制旧模板。
 
-五类均使用“总 Prompt＋当前场景 Prompt＋用户输入与系统参数”。每图内部形成 `photo_id`、具体事实、`scene_dimension`、`highlight_label`、`highlight_keyword`、`supporting_keywords` 和 `praise_text`；整体生成 `title`。海报仅展示每图主关键词和对应话术，内部字段不公开，不自动写入个人知识库。
+五类均使用“总 Prompt＋当前场景 Prompt＋用户输入与系统参数”。每图内部形成 `photo_id`、具体事实、`scene_dimension`、`highlight_keyword` 和 `praise_text`；整体生成 `title`。海报仅展示每图主关键词和对应话术，内部字段不公开，不自动写入个人知识库。
 
 ### 4.3 场景提示词与接入方式
 

@@ -1,4 +1,4 @@
-# 夸一夸 · 移动端 UI 设计稿 v2
+# 夸夸 · 移动端 UI 设计稿 v2
 
 日期：2026-09-28
 
@@ -21,15 +21,15 @@
 
 ## 第一张提示词
 
-Create a polished production-quality Chinese WeChat mini-program UI design board for “夸一夸”. This board contains EXACTLY THREE full mobile screens, equal size, arranged left to right: creation home, “我的夸夸” list, and that list with an image preview modal. Wide landscape board, very high resolution, prefer 2400x1600 or comparable. Each screen approximately 390x844 proportions, large readable Chinese typography. Use flat screen artboards, softly rounded outer corners, thin shadow, no physical device hardware, no perspective. Minimal neutral warm-beige outer background with narrow gutters. No presentation titles, annotations or arrows outside screens.
+Create a polished production-quality Chinese WeChat mini-program UI design board for “夸夸”. This board contains EXACTLY THREE full mobile screens, equal size, arranged left to right: creation home, “我的夸夸” list, and that list with an image preview modal. Wide landscape board, very high resolution, prefer 2400x1600 or comparable. Each screen approximately 390x844 proportions, large readable Chinese typography. Use flat screen artboards, softly rounded outer corners, thin shadow, no physical device hardware, no perspective. Minimal neutral warm-beige outer background with narrow gutters. No presentation titles, annotations or arrows outside screens.
 REFERENCE 1 is a finished LANDSCAPE poster to display as the completed image inside screen2 and screen3. Preserve its recognizable bread / sunlit desk / flower composition, title “你把日子，过出了光。” and 3:2 horizontal aspect. It is a compositing insert, NOT the app page layout.
 REFERENCE 2 is the current homepage and defines existing brand, UI rhythm, green/ivory style. Improve precision and craftsmanship while preserving business structure.
 
 Shared design system: warm ivory #FAF9F5, dark forest text #263B31, jade green #397C5F main buttons, subtle sage pills #E8EEE5, fine light-gray-green dividers, tiny gold sun logo. Editorial Chinese Songti headings, clear Chinese sans UI labels. Fine one-weight line icons. Crisp, restrained, generous breathing room. No gradients or decorative blobs. All screens have status bar 9:41, WeChat capsule upper right and small bottom home indicator. No bottom tab navigation.
 
 SCREEN 1 — HOME:
-Top bar LEFT: small round pale sage avatar with “叶”, followed by clearly visible “我的” text to make the account entry recognizable; brand “夸一夸” with little gold sun to its right; WeChat capsule independently at far right. Align all without collision.
-Headline “这一刻，值得夸一夸”, last three characters jade green.
+Top bar LEFT: small round pale sage avatar with “叶”, followed by clearly visible “我的” text to make the account entry recognizable; brand “夸夸” with little gold sun to its right; WeChat capsule independently at far right. Align all without collision.
+Headline “这一刻，值得夸夸”, last three characters jade green.
 Subtitle “放张照片，说一句话。”
 Five equally sized category pills, ONE row, exact names “宝妈” “职场人” “学生” “长辈” “日常”. 日常 selected sage.
 Large image upload area showing the original PHOTO of hands breaking artisan bread in sunlight, from the bread image depicted in reference1 (no poster text in upload photo). Small white camera button “换照片” and small remove × over lower right.
@@ -37,7 +37,7 @@ Under image: small “3 张照片 · 最多 6 张” and right “＋ 添加照�
 A short row of 3 small thumbnail photos: bread, sunlit desk with coffee, yellow flowers. These are separate original upload photos, not three copies of the poster.
 Label “说说这一刻”.
 Text input with exact “今天做了面包，泡了咖啡，也给窗边添了一束花。”
-One prominent jade button “夸一夸，生成海报”.
+One prominent jade button “夸夸，生成海报”.
 Below button just breathing space and home indicator. Do not put remaining quota, per-use cost, package link, knowledge hint, “去了解” or any extra footer.
 
 SCREEN 2 — RECORDS:
@@ -67,7 +67,7 @@ Preserve exact business copy with beautiful precise Chinese. The overall board m
 
 ## 第二张提示词
 
-Create the SECOND matching UI design board for Chinese WeChat mini program “夸一夸”, consisting of EXACTLY THREE full mobile screens arranged horizontally: 我的, 套餐, 使用记录. Match reference1's mobile artboard proportions, colors, fonts, controls, margins and visual finish exactly so this feels like one coherent six-screen design set. Reference1 is the first three-screen board, only a DESIGN SYSTEM reference; do not repeat those three pages. Reference2 is the current ledger screenshot and is the exact INFORMATION STRUCTURE reference for 使用记录.
+Create the SECOND matching UI design board for Chinese WeChat mini program “夸夸”, consisting of EXACTLY THREE full mobile screens arranged horizontally: 我的, 套餐, 使用记录. Match reference1's mobile artboard proportions, colors, fonts, controls, margins and visual finish exactly so this feels like one coherent six-screen design set. Reference1 is the first three-screen board, only a DESIGN SYSTEM reference; do not repeat those three pages. Reference2 is the current ledger screenshot and is the exact INFORMATION STRUCTURE reference for 使用记录.
 Wide landscape output, very high resolution comparable to reference1. Three equal flat mobile screen artboards about 390x844 each, full screen bottoms visible, gently rounded outer corners and subtle shadow on warm neutral board, no physical phone hardware, no perspective, no external headings or captions.
 Shared visual system: ivory #FAF9F5 background, dark forest #263B31, jade #397C5F primary buttons, soft sage cards, tiny gold sun accents. Elegant Chinese Songti headlines, crisp Chinese sans labels, refined typography. 9:41 status bars, WeChat top-right capsules, bottom home indicators. Calm ample whitespace is intentional. Don't fill empty lower areas with extra modules. NO bottom navigation.
 
@@ -93,7 +93,7 @@ Small understated gold sun, centered editorial heading in two lines:
 多一点肯定。”
 Below small “五种生活场景，都在这一份心意里。”
 One well-spaced pale sage subscription card, very fine green outline:
-label “夸一夸 · 包月套餐”; small badge “30 天有效”.
+label “夸夸 · 包月套餐”; small badge “30 天有效”.
 Large elegant numeral “30” with smaller “次海报制作”.
 Secondary line “购买成功起 30 天 · 手动续购”.
 Fine divider, bottom label “套餐价格” left, “价格待公布” right.

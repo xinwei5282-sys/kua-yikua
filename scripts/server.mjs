@@ -12,4 +12,4 @@ http.createServer(async(req,res)=>{
     if(!file.startsWith(root+path.sep)) {res.writeHead(403);res.end();return;}
     const data=await fs.readFile(file);res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(data);
   }catch{res.writeHead(404);res.end('Not found');}
-}).listen(8896,'127.0.0.1',()=>console.log('夸一夸原型 http://127.0.0.1:8896/'));
+}).listen(8896,'127.0.0.1',()=>console.log('夸夸原型 http://127.0.0.1:8896/'));
