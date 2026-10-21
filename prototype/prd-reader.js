@@ -67,7 +67,7 @@ function setOpen(open,focus=false){
 toggle.addEventListener('click',()=>setOpen(panel.hidden,true));
 document.querySelector('#prd-close').addEventListener('click',()=>setOpen(false,true));
 document.querySelector('#prd-refresh').addEventListener('click',load);
-document.querySelector('#prd-today').addEventListener('click',()=>{const heading=[...content.querySelectorAll('h2')].find(h=>h.textContent.startsWith('十五、'));if(heading){chapters.value=heading.id;content.scrollTop+=heading.getBoundingClientRect().top-content.getBoundingClientRect().top-18;}});
+document.querySelector('#prd-today').addEventListener('click',()=>{const heading=[...content.querySelectorAll('h2')].find(h=>h.textContent.startsWith('十四、'));if(heading){chapters.value=heading.id;content.scrollTop+=heading.getBoundingClientRect().top-content.getBoundingClientRect().top-18;}});
 chapters.addEventListener('change',()=>{
   const heading=document.getElementById(chapters.value);
   if(heading)content.scrollTop+=heading.getBoundingClientRect().top-content.getBoundingClientRect().top-18;

@@ -32,5 +32,5 @@ for(const name of ['产品方案-v1.0.md','kua_yi_kua_poster_prompts.md']){
 }
 await fs.copyFile(path.join(out,'prototype/index.html'),path.join(out,'index.html'));
 await fs.writeFile(path.join(out,'.nojekyll'),'');
-await fs.writeFile(path.join(out,'version.json'),JSON.stringify({commit:process.env.GITHUB_SHA||'local',prd:'1.7'})+'\n');
+await fs.writeFile(path.join(out,'version.json'),JSON.stringify({commit:process.env.GITHUB_SHA||'local',prd:'1.8'})+'\n');
 console.log(`Pages built: ${out} (base ${prefix||'/'})`);
