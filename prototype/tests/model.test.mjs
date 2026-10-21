@@ -74,3 +74,18 @@ test('打卡数据按账号隔离并可从旧完成任务迁移', () => {
  const x=make(); const old={schema:1,activeAccount:'a',accounts:{a:{...createStore(x.storage,x.now).getAccount(),jobs:[{id:'old',status:'done',finishedAt:1000,title:'旧',body:'记录',photos:['sample:0'],category:'daily',text:'旧',useKnowledge:true}]},b:createStore(x.storage,x.now).getState().accounts.b}};
  x.storage.setItem('kua-yikua:model:v1',JSON.stringify(old)); const s=createStore(x.storage,x.now); assert.equal(s.checkinSummary().total,1); assert.equal(createStore(x.storage,x.now).checkinSummary().total,1); s.switchAccount('b'); assert.equal(s.checkinSummary().total,0);
 });
+
+test('poster orientation persists and is part of task identity',()=>{
+ const x=make(),s=createStore(x.storage,x.now);ready(s);
+ assert.equal(s.getAccount().draft.orientation,'portrait');
+ const portrait=s.submitJob();assert.equal(portrait.orientation,'portrait');
+ s.setDraft({orientation:'landscape'});const landscape=s.submitJob();
+ assert.notEqual(landscape.id,portrait.id);assert.equal(landscape.orientation,'landscape');
+ assert.equal(createStore(x.storage,x.now).getAccount().draft.orientation,'landscape');
+ assert.throws(()=>s.setDraft({orientation:'invalid'}));
+});
+test('creation accepts five photos and rejects six without changing draft',()=>{
+ const x=make(),s=createStore(x.storage,x.now);s.setDraft({photos:Array(5).fill('sample:0')});
+ assert.throws(()=>s.setDraft({photos:Array(6).fill('sample:0')}),/1至5/);
+ assert.equal(s.getAccount().draft.photos.length,5);
+});

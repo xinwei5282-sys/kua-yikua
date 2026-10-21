@@ -149,13 +149,22 @@ function drawPraisedPhotos(ctx, photos, praises, title) {
 }
 
 /** Render the default 3:2 landscape poster; preview and PNG share this canvas. */
-export async function renderPoster({ photos = [], title = '', body = '', date = '', praises = [] } = {}) {
+export async function renderPoster({ photos = [], title = '', body = '', date = '', praises = [], orientation = 'landscape' } = {}) {
   if (!Array.isArray(photos) || photos.length < 1 || photos.length > 6) throw new Error('海报需要 1 至 6 张图片');
   if (typeof document === 'undefined' || typeof document.createElement !== 'function') throw new Error('当前环境不支持 Canvas 海报导出');
   const images = await Promise.all(photos.map((source, index) => loadImage(source, index)));
   const processed = images.map(preparePhoto);
   await document.fonts?.ready;
   const canvas = document.createElement('canvas');
+  if(orientation==='portrait'){
+    canvas.width=1000;canvas.height=1500;
+    const ctx=canvas.getContext('2d');ctx.fillStyle=COLORS.paper;ctx.fillRect(0,0,1000,1500);
+    textBlock(ctx,title||'每个瞬间，都值得被看见。',54,56,892,190,56,COLORS.ink,600);
+    const columns=images.length===1?1:2,rows=Math.ceil(images.length/columns),gap=28;
+    const cellW=(892-gap*(columns-1))/columns,cellH=(1030-gap*(rows-1))/rows;
+    processed.forEach((p,i)=>{const x=54+(i%columns)*(cellW+gap),y=270+Math.floor(i/columns)*(cellH+gap);drawPrepared(ctx,p,{x,y,w:cellW,h:cellH-92});textBlock(ctx,praises[i]||(images.length===1?body:'这一刻，值得被好好记住。'),x,y+cellH-78,cellW,78,images.length===1?29:24);});
+    ctx.fillStyle=COLORS.muted;ctx.font=`24px ${SANS}`;ctx.fillText(String(date||''),54,1440);ctx.textAlign='right';ctx.fillText('夸夸',946,1440);return canvas;
+  }
   canvas.width = WIDTH; canvas.height = HEIGHT;
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = COLORS.paper; ctx.fillRect(0, 0, WIDTH, HEIGHT);

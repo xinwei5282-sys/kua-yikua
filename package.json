@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "node scripts/server.mjs",
-    "test": "node --test prototype/tests/model.test.mjs",
+    "test": "node --test prototype/tests/*.test.mjs",
     "sync:prompts": "node scripts/sync-prd-prompts.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   }

@@ -12,7 +12,7 @@ if(!await ready()){
 }
 if(!await ready())throw Error('预览服务未启动');
 const index=process.argv.indexOf('--route');const route=index<0?'home':process.argv[index+1];
-if(!['home','profile','knowledge','records','plan','guide'].includes(route))throw Error('未知页面');
+if(!['home','communities','profile','knowledge','records','plan','guide'].includes(route))throw Error('未知页面');
 const url=base+'/'+(process.argv.includes('--prd')?'?prd=1':'')+'#'+route;
 console.log(JSON.stringify({root,url,source:'prototype/index.html',status:'server-and-source-verified'}));
 if(!process.argv.includes('--no-open'))spawn('open',[url],{stdio:'ignore'});
